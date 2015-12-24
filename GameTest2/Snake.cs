@@ -81,15 +81,8 @@ namespace GameTest2
                 this.sprPosition.X += 5;
                 rightDirection = true;
             }
-            sprRectangle.X = (((int)(this.sprPosition.X + this.sprPosition.Y) / 10) % 3) * 56 + 6;
-            if (this.rightDirection)
-            {
-                sprRectangle.Y = 0;
-            }
-            else
-            {
-                sprRectangle.Y = 112;
-            }
+//            sprRectangle.X = (((int)(this.sprPosition.X + this.sprPosition.Y) / 10) % 3) * 56 + 6;
+
 
             
             base.Update(gameTime);
@@ -98,13 +91,14 @@ namespace GameTest2
         public override void Draw(GameTime gameTime)
         {
             SpriteBatch sprBatch = (SpriteBatch)Game.Services.GetService(typeof(SpriteBatch));
-            sprBatch.Draw(sprTexture, sprPosition, sprRectangle, Color.White, 0.0f, new Vector2(0, 0), 1.0f, SpriteEffects.None, 0.0f);
+            SpriteEffects eff = (this.rightDirection) ? SpriteEffects.None : SpriteEffects.FlipHorizontally;
+            sprBatch.Draw(sprTexture, sprPosition, sprRectangle, Color.White, 0.0f, new Vector2(0, 0), 0.5f, eff, 0.0f);
             base.Draw(gameTime);
         }
 
         public Rectangle getRect()
         {
-            return new Rectangle((int)sprPosition.X, (int)sprPosition.Y, sprRectangle.Width, sprRectangle.Height);
+            return new Rectangle((int)sprPosition.X, (int)sprPosition.Y, sprRectangle.Width / 2, sprRectangle.Height / 2);
         }
     }
 }

@@ -14,13 +14,15 @@ namespace GameTest2
         private Rectangle sprRectangle;
         private Vector2 sprPosition;
         private bool isVisible = true;
+        private bool orient;
 
-        public Anvil(MyGame game, ref Texture2D givenTexture, Rectangle givenRect, Vector2 givenPosition)
+        public Anvil(MyGame game, ref Texture2D givenTexture, Rectangle givenRect, Vector2 givenPosition, bool givenOrient)
             : base(game)
         {
             this.sprTexture = givenTexture;
             this.sprRectangle = givenRect;
             this.sprPosition = givenPosition;
+            this.orient = givenOrient;
         }
 
         /// <summary>
@@ -76,7 +78,12 @@ namespace GameTest2
         public override void Draw(GameTime gameTime)
         {
             SpriteBatch sprBatch = (SpriteBatch)Game.Services.GetService(typeof(SpriteBatch));
-            sprBatch.Draw(sprTexture, sprPosition, sprRectangle, Color.White);
+            SpriteEffects eff = SpriteEffects.None;
+            if (this.orient == true)
+            {
+                eff = SpriteEffects.FlipHorizontally;
+            }
+            sprBatch.Draw(sprTexture, sprPosition, sprRectangle, Color.White, 0.0f, new Vector2(), 1.0f, eff, 0);
 
             base.Draw(gameTime);
         }

@@ -71,7 +71,7 @@ namespace GameTest2
             }
             sprPosition.Y = this.defaultY;
             //sprRectangle.X = (((int)(this.sprPosition.X) / 10) % 3) * 56 + 6;
-            sprRectangle.Y = ((int)(this.sprPosition.X / 24) % 3) * 64;
+            //sprRectangle.Y = ((int)(this.sprPosition.X / 24) % 3) * 64;
 
             MyGame g = (MyGame)this.Game;
             if (this.getRect().Intersects(g.snakeObject.getRect())) {

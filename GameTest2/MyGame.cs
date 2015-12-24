@@ -27,7 +27,7 @@ namespace GameTest2
 
         public int tick = 0;
         public int score = 0;
-        public int maxTime = 25 * 1000;
+        public int maxTime = 120 * 1000;
         private int elapsedTime = 0;
         public bool isRunning = true;
         public bool isOver = false;
@@ -59,7 +59,7 @@ namespace GameTest2
         {
             // TODO: Add your initialization logic here
             this.IsMouseVisible = true;
-            this.Window.Title = "SNAKE: THE GAME";
+            this.Window.Title = "PLIS: THE GAME";
             base.Initialize();
         }
 
@@ -86,13 +86,13 @@ namespace GameTest2
 
         private void CreateComponents()
         {
-            snakeObject = new Snake(this, ref this.textureSnake, new Rectangle(0, 0, 56, 56),
+            snakeObject = new Snake(this, ref this.textureSnake, new Rectangle(0, 0, 112, 112),
                 new Vector2(550, 480));
             Components.Add(snakeObject);
 
             pauseBtn = new CloseButton(this, ref this.texturePause, new Rectangle(0, 0, 100, 100),
                 new Vector2(800 - 100, 0));
-            Components.Add(pauseBtn);
+            //Components.Add(pauseBtn);
 
             manObject = new Man(this, ref this.textureMan, new Rectangle(0, 0, 40, 64), new Vector2(40, 64));
             Components.Add(manObject);
@@ -141,14 +141,14 @@ namespace GameTest2
         private void SpawnObjectives()
         {
             int pos = this.random.Next(50, 750);
-            if (this.random.Next(0, 99) > 20)
+            if (this.random.Next(0, 99) > 30)
             {
                 Apple obj = new Apple(this, ref this.textureApple, new Rectangle(0, 0, 27, 26), new Vector2(pos, 70));
                 Components.Add(obj);
             }
             else
             {
-                Anvil obj = new Anvil(this, ref this.textureAnvil, new Rectangle(0, 0, 64, 35), new Vector2(pos, 60));
+                Anvil obj = new Anvil(this, ref this.textureAnvil, new Rectangle(0, 0, 70, 31), new Vector2(pos, 60), random.Next(1, 3) == 2 ? true : false);
                 Components.Add(obj);
             }
         }
@@ -167,12 +167,12 @@ namespace GameTest2
             string status = "";
             Color textColor;
             if (isOver) {
-                status = this.gameResult ? "You win!" : "You lose!";
-                status = status + " Score: " + this.score.ToString();
+                status = this.gameResult ? "Plis win!" : "Plis lose!";
+                status = status + " Macbooks: " + this.score.ToString();
                 textColor = this.gameResult ? Color.GreenYellow : Color.Red;
             } else {
                 double expired = (this.maxTime - this.elapsedTime) / 1000.0;
-                status = "Score: " + this.score.ToString() + "                  (" + string.Format("{0:F1}", expired) + "s)";
+                status = "Macbooks: " + this.score.ToString() + "                  (" + string.Format("{0:F1}", expired) + "s)";
                 textColor = Color.Yellow;
             }
             int x = GraphicsDevice.Viewport.Width / 2 - (int)scoreFont.MeasureString(status).X / 2;
